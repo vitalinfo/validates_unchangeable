@@ -1,0 +1,4 @@
+en:
+  errors:
+    messages:
+      unchangeable: cannot be changed
