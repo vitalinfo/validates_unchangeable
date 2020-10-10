@@ -3,7 +3,7 @@
 RSpec::Matchers.define :validate_unchangeable_of do |attribute|
   match do
     actual = subject.is_a?(Class) ? subject.new : subject
-    actual.public_send(:"#{attribute}=", 'qwerty')
+    actual.public_send(:"#{attribute}=", 'qwerty') if actual.public_send(attribute).nil?
     actual.save(validate: false)
     actual.public_send(:"#{attribute}=", 'ytrewq')
     expect(actual).to be_invalid
