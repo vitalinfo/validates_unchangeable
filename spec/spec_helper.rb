@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'active_record'
 require 'sqlite3'
 require 'validates_unchangeable'
+require 'validates_unchangeable/rspec_matcher'
 
 Dir["#{File.dirname(__FILE__)}/db/**/*.rb",
     "#{File.dirname(__FILE__)}/support/**/*.rb",
