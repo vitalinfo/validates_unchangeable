@@ -5,6 +5,7 @@ class TestAm
   include ActiveModel::Validations
 
   define_attribute_methods :value
+  attr_reader :value
 
   validates :value, unchangeable: true
 
@@ -15,8 +16,6 @@ class TestAm
   def initialize(attributes = {})
     @value = attributes[:value]
   end
-
-  attr_reader :value
 
   def value=(val)
     value_will_change! unless val == @value
