@@ -5,6 +5,10 @@ require 'active_record'
 require 'sqlite3'
 require 'validates_unchangeable'
 
+Dir["#{File.dirname(__FILE__)}/db/**/*.rb",
+    "#{File.dirname(__FILE__)}/support/**/*.rb",
+    "#{File.dirname(__FILE__)}/resources/**/*.rb"].sort.each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
@@ -15,16 +19,4 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-end
-
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
-
-ActiveRecord::Schema.define(version: 1) do
-  create_table 'tests', force: true do |t|
-    t.string   'value'
-  end
-end
-
-class Test < ActiveRecord::Base
-  validates :value, unchangeable: true
 end
