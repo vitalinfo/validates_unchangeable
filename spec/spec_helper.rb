@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'active_record'
+require 'sqlite3'
 require 'validates_unchangeable'
 
 RSpec.configure do |config|
@@ -13,4 +15,16 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
+
+ActiveRecord::Schema.define(version: 1) do
+  create_table 'tests', force: true do |t|
+    t.string   'value'
+  end
+end
+
+class Test < ActiveRecord::Base
+  validates :value, unchangeable: true
 end
