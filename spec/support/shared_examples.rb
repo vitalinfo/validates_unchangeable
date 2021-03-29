@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for 'unchangeable: validation' do |klass| # rubocop:disable Metrics/BlockLength
+RSpec.shared_examples_for 'unchangeable: validation' do |klass, attribute, value, new_value| # rubocop:disable Metrics/BlockLength
   describe 'when create' do
     context 'without value' do
       let(:object) { klass.new.tap(&:save) }
@@ -9,7 +9,7 @@ RSpec.shared_examples_for 'unchangeable: validation' do |klass| # rubocop:disabl
     end
 
     context 'with value' do
-      let(:object) { klass.create(value: 'qwerty') }
+      let(:object) { klass.create(attribute => value) }
 
       it { expect(object).to be_valid }
     end
@@ -20,17 +20,17 @@ RSpec.shared_examples_for 'unchangeable: validation' do |klass| # rubocop:disabl
       let(:object) { klass.create }
 
       before do
-        object.value = 'qwerty'
+        object.public_send("#{attribute}=", value)
       end
 
       it { expect(object).to be_valid }
     end
 
-    context 'without value' do
-      let(:object) { klass.create(value: 'qwerty') }
+    context 'with value' do
+      let(:object) { klass.create(attribute => value) }
 
       before do
-        object.value = 'ytrewq'
+        object.public_send("#{attribute}=", new_value)
       end
 
       it { expect(object).to be_invalid }

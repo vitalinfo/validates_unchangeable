@@ -77,4 +77,4 @@ DEPENDENCIES
   validates_unchangeable!
 
 BUNDLED WITH
-   1.17.3
+   2.2.15
