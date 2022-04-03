@@ -35,12 +35,12 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
-  spec.add_development_dependency 'activerecord', '>= 5.0', '< 7.0'
+  spec.add_development_dependency 'activerecord', '>= 5.0', '< 7.1'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '> 0.90'
   spec.add_development_dependency 'sqlite3', '> 0'
-  spec.add_dependency 'activemodel', '>= 5.0', '< 7.0'
+  spec.add_dependency 'activemodel', '>= 5.0', '< 7.1'
   spec.add_dependency 'i18n'
 end
