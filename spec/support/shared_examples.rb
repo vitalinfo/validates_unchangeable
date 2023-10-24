@@ -17,10 +17,11 @@ RSpec.shared_examples_for 'unchangeable: validation' do |klass, attribute, value
 
   describe 'when update' do
     context 'without value' do
-      let(:object) { klass.create }
+      let(:object) { klass.new }
 
       before do
         object.public_send("#{attribute}=", value)
+        object.save
       end
 
       it { expect(object).to be_valid }
