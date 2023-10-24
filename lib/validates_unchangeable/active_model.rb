@@ -7,8 +7,7 @@ module ActiveModel
     class UnchangeableValidator < ActiveModel::EachValidator
       def validate_each(record, attribute, _value)
         if !record.public_send("#{attribute}_changed?") ||
-           (record.public_send("#{attribute}_was") == default_value_for(record, attribute) &&
-             !record.public_send(attribute).nil?)
+           (record.try(:new_record?) && !record.public_send(attribute).nil?)
           return
         end
 
